@@ -1,0 +1,19 @@
+language: python
+sudo: false
+matrix:
+  include:
+  - python: 3.6
+    env: TOXENV=py36,codecov
+install:
+- pip install -U pip tox
+script:
+- tox
+deploy:
+  provider: pypi
+  user: cfhamlet
+  script: pip install --upgrade setuptools wheel
+  password:
+    secure: wUWwl46EnDPirJiAwgSDhUfHEVvJJm7kvzTM5vwtVqVNb6slTg4a3CbjLE1f5QNV4JIHPyLwwchb8cRwzeFDmaLCcupGKAOYpVPbJm4YEQ1Z+aSahfDCBu9AC4FdsxXTD12a0P8ihkUVpRDzeDjhWMftpewAMFrLVtF4+XzBoaEHTUvIaOwwUUXmxrG1xMOGPc6KCIdbf5ZOHS1NeR56LSlsobrNJwc6xHZDt5MVX0zRXbB7OMDCAlRxUOtLO3iYNUzdJewz1KXQldH5os1JIerGS6aUKAsC36phgJYSA/iGZ/+eqXmkDT5BJhl+6Lxg8Wjfnkg/Wdm5ZfhcX2ZnKjupUS4cr8LdAxGhSrDcDmoHDQ3PAQXGZE/iDjnSsA7fBNixrR5V72smtmxQFHcL99pcvOrCrkkplViNmZVOp98px8LrOGmU5Jfd92tVA4tIuGgCB6oU82AoybV0lR3HgVRvmYGLi+FdKjUwbrDD8puaQhVa77ImruRanQESUr+WIBmPRddBDdhWSOwxAWDVtvYm4zql2WwkULgR43fp3lt7+TGOBt32bKhtj8ROda+EYpJO/c1nFYx8CXIIwpWO9Dj9YdmDvT23YWTaUsUuIsFCLKuelwDOM2yj0qq88NlD605ez27HBVfHjmou6u8IWq8wrOk/qZ7eo5J89nuknMQ=
+  true:
+    tags: true
+    condition: ${TRAVIS_PYTHON_VERSION} == 3.6
