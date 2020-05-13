@@ -1,5 +1,10 @@
 # os-scrapy-record
 
+[![Build Status](https://www.travis-ci.org/cfhamlet/os-scrapy-record.svg?branch=master)](https://www.travis-ci.org/cfhamlet/os-scrapy-record)
+[![codecov](https://codecov.io/gh/cfhamlet/os-scrapy-record/branch/master/graph/badge.svg)](https://codecov.io/gh/cfhamlet/os-scrapy-record)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/os-scrapy-record.svg)](https://pypi.python.org/pypi/os-scrapy-record)
+[![PyPI](https://img.shields.io/pypi/v/os-scrapy-record.svg)](https://pypi.python.org/pypi/os-scrapy-record)
+
 This project provide extensions to process Response/Failure, generate standard Item.
 
 ## Install
