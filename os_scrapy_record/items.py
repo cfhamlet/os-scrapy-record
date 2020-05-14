@@ -26,7 +26,7 @@ class RequestItem(scrapy.Item):
 
 class ResponseItem(scrapy.Item):
     headers = scrapy.Field()
-    body = scrapy.Field()
+    body = scrapy.Field(serializer=lambda x: x)
     status = scrapy.Field()
     ip_address = scrapy.Field()
     failure = scrapy.Field()
