@@ -29,7 +29,7 @@ class ResponseItem(scrapy.Item):
     body = scrapy.Field(serializer=lambda x: x)
     status = scrapy.Field()
     ip_address = scrapy.Field()
-    failure = scrapy.Field()
+    failure = scrapy.Field(serializer=lambda x: repr(x))
 
 
 class FetchRecord(scrapy.Item):
