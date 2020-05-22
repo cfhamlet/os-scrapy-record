@@ -13,7 +13,7 @@ This project provide extensions to process Response/Failure, generate standard I
 pip install os-scrapy-record
 ```
 
-You can run example spider directly in the project root path.
+You can run example spider directly in the project root path
 
 ```
 scrapy crawl example
@@ -63,7 +63,7 @@ scrapy crawl example
 ## Unit Tests
 
 ```
-tox
+sh scripts/test.sh
 ```
 
 ## License
