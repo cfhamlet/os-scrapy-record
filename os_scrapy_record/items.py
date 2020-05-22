@@ -22,7 +22,7 @@ class RequestItem(scrapy.Item):
     url = scrapy.Field()
     method = scrapy.Field()
     headers = scrapy.Field()
-
+    body = scrapy.Field()
 
 class ResponseItem(scrapy.Item):
     headers = scrapy.Field()
@@ -62,7 +62,7 @@ def fetch_record(
     assert request is not None
 
     req = RequestItem(
-        url=origin_url(request), method=request.method, headers=request.headers
+        url=origin_url(request), method=request.method, headers=request.headers, body=request.body
     )
 
     meta = copy.deepcopy(request.meta)
