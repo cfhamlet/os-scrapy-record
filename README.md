@@ -52,9 +52,9 @@ scrapy crawl example
 
     the mumbers of this class are:
 
-    - request: ``os_scrapy_record.items.RequestItem``, members: url，method，headers, body 
+    - request: ``os_scrapy_record.items.RequestItem``, members: url, method, headers, body 
     - meta: ``dict``, request.meta, it is better to use lower case and '_' as separator as key
-    - response: ``os_scrapy_record.items.ResponseItem``，members: headers，body，status，ip_address(Scrapy 2.1.0+), failure
+    - response: ``os_scrapy_record.items.ResponseItem``，members: headers, body, status, ip_address(Scrapy 2.1.0+), failure
 
 * ``os_scrapy_record.fetch_status.FetchStatus``
 
