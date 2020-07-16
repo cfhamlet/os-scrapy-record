@@ -71,8 +71,7 @@ def fetch_record(
 
     meta = copy.deepcopy(request.meta)
     if REDIRECT_URLS in meta:
-        if response is None:
-            meta[REDIRECT_URLS].append(request.url)
+        meta[REDIRECT_URLS].append(request.url)
         meta[REDIRECT_URLS] = meta[REDIRECT_URLS][1:]
 
     if response:
