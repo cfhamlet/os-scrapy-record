@@ -1,5 +1,6 @@
 from typing import Type, Union
 
+from idna.core import IDNAError
 from scrapy.exceptions import IgnoreRequest
 from scrapy.http.response import Request, Response
 from scrapy.spidermiddlewares.httperror import HttpError
@@ -21,6 +22,7 @@ from .fetch_status import (
     CONNECTION_REFUSED,
     CONNECTION_TIMEOUT,
     DNS_LOOKUP,
+    INVALID_URI,
     RESPONSE_NEVER_RECEIVED,
     ROBOTS_TXT,
     UNKNOW,
@@ -33,6 +35,7 @@ EXCEPION_TO_FETCH_STATUS = {
     HttpError: lambda e: http_fetch_status(e.response.status),
     FetchStatusException: lambda e: e.fetch_status,
     TCPTimedOutError: lambda e: CONNECTION_TIMEOUT,
+    IDNAError: lambda e: INVALID_URI,
     TimeoutError: lambda e: CONNECT_TIMEOUT_FAILURE,
     ConnectionRefusedError: lambda e: CONNECTION_REFUSED,
     DNSLookupError: lambda e: DNS_LOOKUP,
