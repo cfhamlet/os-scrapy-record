@@ -14,6 +14,7 @@ from .items import FetchRecord, fetch_record
 
 class OnResponse(object):
     def __init__(self, crawler: Type[Crawler]):
+        crawler.signals.connect(self.regist, signal=signals.request_scheduled)
         crawler.signals.connect(self.regist, signal=signals.request_reached_downloader)
         self.logger = logging.getLogger(self.__class__.__name__)
 

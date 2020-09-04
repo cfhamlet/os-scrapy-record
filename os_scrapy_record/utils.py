@@ -27,7 +27,6 @@ from .fetch_status import (
     ROBOTS_TXT,
     UNKNOW,
     FetchStatus,
-    Group,
     http_fetch_status,
 )
 
