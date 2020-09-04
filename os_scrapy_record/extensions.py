@@ -47,14 +47,18 @@ class ResponseCallback(OnResponse):
         yield record
 
 
+def errback(failure: Failure) -> Generator[FetchRecord, None, None]:
+    request = failure.request
+    if FETCH_TIME not in request.meta:
+        request.meta[FETCH_TIME] = int(time.time())
+    record = fetch_record(failure=failure)
+    yield record
+
+
 class ResponseErrback(OnResponse):
     def regist(self, request: Type[Request], spider: Type[Spider]):
         if request.errback is None:
             request.errback = self.errback
 
     def errback(self, failure: Failure) -> Generator[FetchRecord, None, None]:
-        request = failure.request
-        if FETCH_TIME not in request.meta:
-            request.meta[FETCH_TIME] = int(time.time())
-        record = fetch_record(failure=failure)
-        yield record
+        return errback(failure)
