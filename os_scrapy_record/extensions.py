@@ -43,7 +43,7 @@ class ResponseCallback(OnResponse):
             request.callback = self.callback
 
     def callback(self, response: Type[Response]) -> Generator[FetchRecord, None, None]:
-        record = fetch_record(response=response)
+        record = fetch_record(response)
         yield record
 
 
@@ -51,7 +51,7 @@ def errback(failure: Failure) -> Generator[FetchRecord, None, None]:
     request = failure.request
     if FETCH_TIME not in request.meta:
         request.meta[FETCH_TIME] = int(time.time())
-    record = fetch_record(failure=failure)
+    record = fetch_record(failure)
     yield record
 
 
