@@ -15,7 +15,7 @@ def read(*filenames, **kwargs):
 
 
 setup(
-    name="os_scrapy_record",
+    name="os-scrapy-record",
     version="0.0.9",
     packages=find_packages(),
     include_package_data=True,
@@ -33,9 +33,7 @@ setup(
         "Natural Language :: English",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: Implementation :: CPython",
-        "Programming Language :: Python :: Implementation :: PyPy",
     ],
 )
