@@ -6,7 +6,7 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import copy
-from typing import Optional, Type
+from typing import Type, Union
 
 import scrapy
 from scrapy.http.response import Response
@@ -14,7 +14,6 @@ from scrapy.spidermiddlewares.httperror import HttpError
 from twisted.python.failure import Failure
 
 from .const import REDIRECT_URLS
-from .fetch_status import FetchStatus
 from .utils import failure_to_status, origin_url, response_to_status
 
 
@@ -46,19 +45,19 @@ class FetchRecords(scrapy.Item):
 
 
 def fetch_record(
-    response: Optional[Type[Response]] = None,
-    failure: Optional[Failure] = None,
-    status: Optional[FetchStatus] = None,
+    response: Union[Type[Response], Failure],
 ) -> FetchRecord:
-    req = res = request = None
+    req = res = request = failure = None
 
-    if failure is None:
-        if response is not None:
-            request = response.request
-    else:
+    if isinstance(response, Failure):
+        failure = response
         request = failure.request
         if failure.check(HttpError):
             response = failure.value.response
+        else:
+            response = None
+    else:
+        request = response.request
 
     assert request is not None
 
