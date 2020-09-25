@@ -1,6 +1,7 @@
 from typing import Type, Union
 
 from idna.core import IDNAError
+from scrapy.core.downloader.handlers.http11 import TunnelError
 from scrapy.exceptions import IgnoreRequest
 from scrapy.http.response import Request, Response
 from scrapy.spidermiddlewares.httperror import HttpError
@@ -30,6 +31,19 @@ from .fetch_status import (
     http_fetch_status,
 )
 
+
+def parse_TunnelError(e):
+    try:
+        s = str(e)
+        if "[" in s and "]" in s:
+            r = s[s.find("[") + 1 : s.rfind("]")]
+            d = eval(r)
+            return http_fetch_status(d["status"])
+    except:
+        pass
+    return UNKNOW
+
+
 EXCEPION_TO_FETCH_STATUS = {
     HttpError: lambda e: http_fetch_status(e.response.status),
     FetchStatusException: lambda e: e.fetch_status,
@@ -40,6 +54,7 @@ EXCEPION_TO_FETCH_STATUS = {
     DNSLookupError: lambda e: DNS_LOOKUP,
     ResponseNeverReceived: lambda e: RESPONSE_NEVER_RECEIVED,
     CancelledError: lambda e: CANCELED_ACTIVE,
+    TunnelError: parse_TunnelError,
     IgnoreRequest: lambda e: ROBOTS_TXT
     if "Forbidden by robots.txt" in str(e)
     else UNKNOW,
