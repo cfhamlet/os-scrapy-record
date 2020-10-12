@@ -23,7 +23,7 @@ class Server(IntEnum):
     RESPONSE_NEVER_RECEIVED = 5
     INVALID_ARGUMENT = 22
     NETWORK_UNREACHABLE = 101
-    CONNECT_RESET_BY_PEER = 104
+    CONNECTION_RESET_BY_PEER = 104
     CONNECTION_TIMEOUT = 110
     CONNECTION_REFUSED = 111
     NO_ROUTE_TO_HOST = 113
@@ -137,8 +137,6 @@ ROBOTS_TXT = fetch_status(Group.RULE, Rule.ROBOTS_TXT)
 CONNECT_TIMEOUT_FAILURE = fetch_status(Group.RULE, Rule.CONNECT_TIMEOUT_FAILURE)
 INVALID_URI = fetch_status(Group.RULE, Rule.INVALID_URI)
 TOO_MANNY_REDIR = fetch_status(Group.RULE, Rule.TOO_MANNY_REDIR)
-NO_ROUTE_TO_HOST = fetch_status(Group.SERVER, Server.NO_ROUTE_TO_HOST)
-INVALID_URI = fetch_status(Group.RULE, Rule.INVALID_URI)
 
 
 def server_fetch_status(code: int) -> FetchStatus:
