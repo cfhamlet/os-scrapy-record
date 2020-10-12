@@ -21,8 +21,12 @@ class Server(IntEnum):
     CONNECT_ERROR = 2
     RESPONSE_FAILED = 4
     RESPONSE_NEVER_RECEIVED = 5
+    INVALID_ARGUMENT = 22
+    NETWORK_UNREACHABLE = 101
+    CONNECT_RESET_BY_PEER = 104
     CONNECTION_TIMEOUT = 110
     CONNECTION_REFUSED = 111
+    NO_ROUTE_TO_HOST = 113
 
 
 @enum.unique
@@ -121,13 +125,21 @@ def http_fetch_status(code: int) -> FetchStatus:
     return fetch_status(Group.HTTP, code)
 
 
+SERVER_FETCH_STATUS = dict([(s.value, fetch_status(Group.SERVER, s)) for s in Server])
+
+
 OK = fetch_status(Group.HTTP, 200)
 UNKNOW = fetch_status(Group.UNKNOW, -1)
-CONNECTION_TIMEOUT = fetch_status(Group.SERVER, Server.CONNECTION_TIMEOUT)
-CONNECTION_REFUSED = fetch_status(Group.SERVER, Server.CONNECTION_REFUSED)
 DNS_LOOKUP = fetch_status(Group.DNS, DNS.LOOKUP_ERROR)
 RESPONSE_NEVER_RECEIVED = fetch_status(Group.SERVER, Server.RESPONSE_NEVER_RECEIVED)
 CANCELED_ACTIVE = fetch_status(Group.RULE, Rule.CANCELED_ACTIVE)
 ROBOTS_TXT = fetch_status(Group.RULE, Rule.ROBOTS_TXT)
 CONNECT_TIMEOUT_FAILURE = fetch_status(Group.RULE, Rule.CONNECT_TIMEOUT_FAILURE)
 INVALID_URI = fetch_status(Group.RULE, Rule.INVALID_URI)
+TOO_MANNY_REDIR = fetch_status(Group.RULE, Rule.TOO_MANNY_REDIR)
+NO_ROUTE_TO_HOST = fetch_status(Group.SERVER, Server.NO_ROUTE_TO_HOST)
+INVALID_URI = fetch_status(Group.RULE, Rule.INVALID_URI)
+
+
+def server_fetch_status(code: int) -> FetchStatus:
+    return SERVER_FETCH_STATUS.get(code, UNKNOW)
