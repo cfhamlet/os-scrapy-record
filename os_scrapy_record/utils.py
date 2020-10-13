@@ -81,6 +81,7 @@ EXCEPION_TO_FETCH_STATUS = {
     TunnelError: proc_TunnelError,
     IgnoreRequest: proc_IgnoreRequest,
     ParseError: proc_ParseError,
+    ValueError: proc_ValueError,
 }
 
 
