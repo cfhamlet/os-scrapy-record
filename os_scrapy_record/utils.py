@@ -103,7 +103,14 @@ def response_to_status(response: Type[Response]) -> FetchStatus:
 
 
 def origin_url(request_or_response: Union[Request, Response]) -> str:
+    if hasattr(request_or_response, "original_url"):
+        url = getattr(request_or_response, "original_url")
+        if url is not None:
+            return url
     url = request_or_response.url
     if REDIRECT_URLS in request_or_response.meta:
         url = request_or_response.meta[REDIRECT_URLS][0]
     return url
+
+
+original_url = origin_url
