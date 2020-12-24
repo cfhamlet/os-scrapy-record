@@ -16,7 +16,7 @@ def read(*filenames, **kwargs):
 
 setup(
     name="os-scrapy-record",
-    version="0.0.13",
+    version="0.0.14",
     packages=find_packages(),
     include_package_data=True,
     license="MIT License",
