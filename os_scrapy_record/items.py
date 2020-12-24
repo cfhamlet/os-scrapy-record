@@ -13,7 +13,7 @@ from scrapy.http.response import Response
 from scrapy.spidermiddlewares.httperror import HttpError
 from twisted.python.failure import Failure
 
-from .const import REDIRECT_URLS
+from .const import REDIRECT_TIMES, REDIRECT_URLS
 from .utils import failure_to_status, origin_url, response_to_status
 
 
@@ -70,7 +70,8 @@ def fetch_record(
 
     meta = copy.deepcopy(request.meta)
     if REDIRECT_URLS in meta:
-        meta[REDIRECT_URLS].append(request.url)
+        if REDIRECT_TIMES in meta:
+            meta[REDIRECT_URLS].append(request.url)
         meta[REDIRECT_URLS] = meta[REDIRECT_URLS][1:]
 
     if response:
